@@ -1,1 +1,1 @@
-import GitKit
+@_exported import GitKit

@@ -1,0 +1,39 @@
+name: GitPad
+options:
+  bundleIdPrefix: com.berkgozek
+  deploymentTarget:
+    iOS: "26.0"
+packages:
+  GitPadKit:
+    path: Packages/GitPadKit
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    MARKETING_VERSION: "0.1"
+    CURRENT_PROJECT_VERSION: "1"
+targets:
+  GitPad:
+    type: application
+    platform: iOS
+    sources: [GitPad]
+    dependencies:
+      - package: GitPadKit
+        product: GitPadCore
+    settings:
+      base:
+        # Keep these two fixed: a different team or bundle ID makes iPadOS treat it as a new app,
+        # and removing the old one deletes every repository cloned into it.
+        PRODUCT_BUNDLE_IDENTIFIER: com.berkgozek.GitPad
+        DEVELOPMENT_TEAM: KBT99X57V8
+        CODE_SIGN_STYLE: Automatic
+        TARGETED_DEVICE_FAMILY: "2"
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: GitPad
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_UIApplicationSupportsMultipleScenes: YES
+        # Exposes Documents/ in Files → On My iPad → GitPad, editable in place by other apps.
+        INFOPLIST_KEY_UIFileSharingEnabled: YES
+        INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor

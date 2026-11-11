@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(swift build *)",
+      "Bash(swift build)",
+      "Bash(swift test *)",
+      "Bash(swift test)",
+      "Bash(swift package resolve)",
+      "Bash(xcodegen generate*)",
+      "Bash(xcodebuild *)",
+      "Bash(xcrun simctl list *)",
+      "Bash(xcrun simctl get_app_container *)",
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git show*)",
+      "Bash(git branch*)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git fetch*)",
+      "Bash(gh repo view *)",
+      "Read(//Users/berkgozek/Downloads/iPadOS_Git_Client_Claude_Prompt.md)",
+      "Read(//Users/berkgozek/Documents/GitHub/general-claude-usage/**)",
+      "WebSearch"
+    ],
+    "deny": [
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git push * --force*)",
+      "Bash(git push * -f*)",
+      "Bash(git push --force-with-lease*)",
+      "Bash(git push * +*)",
+      "Bash(git reset --hard*)",
+      "Bash(git clean -f*)",
+      "Edit(//Users/berkgozek/Documents/GitHub/general-claude-usage/**)",
+      "Write(//Users/berkgozek/Documents/GitHub/general-claude-usage/**)",
+      "Read(//Users/berkgozek/Documents/GitHub/general-claude-usage/.claude/about-me/do-not-use.md)",
+      "Read(//Users/berkgozek/Documents/GitHub/general-claude-usage/.claude/about-me/health.md)"
+    ]
+  }
+}

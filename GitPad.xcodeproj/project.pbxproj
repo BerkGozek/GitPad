@@ -26,6 +26,7 @@
 		0E4780CDB5F825DA2B750CF2 /* GitPad.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = GitPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17BC2D17A009D3291234A298 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		23E2A21CF0A7FB326DCA9166 /* ChangesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangesView.swift; sourceTree = "<group>"; };
+		61EFFF5A1567A75D67ECA1CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6EFA4ED5F2A20CD98AA66A68 /* CloneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloneView.swift; sourceTree = "<group>"; };
 		7FDE35061562132AF2B51FBB /* RepositoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryModel.swift; sourceTree = "<group>"; };
 		8305234CA82B1CFEA59EB098 /* GitPadKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = GitPadKit; path = Packages/GitPadKit; sourceTree = SOURCE_ROOT; };
@@ -62,6 +63,7 @@
 			children = (
 				941A396EA4871BC4B2E5168C /* Assets.xcassets */,
 				BBA15B4F36DC57696041E69A /* GitPadApp.swift */,
+				61EFFF5A1567A75D67ECA1CF /* Info.plist */,
 				F51C0E052125FE1E93F55ED7 /* Models */,
 				AAF2225D0446B0E923B1DA7F /* Views */,
 			);
@@ -274,11 +276,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KBT99X57V8;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GitPad/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = GitPad;
-				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsMultipleScenes = YES;
-				INFOPLIST_KEY_UIFileSharingEnabled = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -300,11 +301,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KBT99X57V8;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GitPad/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = GitPad;
-				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsMultipleScenes = YES;
-				INFOPLIST_KEY_UIFileSharingEnabled = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

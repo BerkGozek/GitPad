@@ -271,9 +271,13 @@ public final class AccountStore: @unchecked Sendable {
     }
 
     /// A libgit2 credential callback that reads the token from the Keychain only when asked.
+    ///
+    /// The token is only ever handed out for the account's own host: if a server redirects to a
+    /// different host, libgit2 asks again with the new URL, and that request gets nothing.
     public func credentialProvider(for account: Account) -> CredentialProvider {
         let secrets = self.secrets
-        return { _, usernameFromURL in
+        return { url, usernameFromURL in
+            guard Self.host(of: url) == account.host else { return nil }
             guard let token = try? secrets.secret(for: account.id) else { return nil }
             let username = account.username.isEmpty ? (usernameFromURL ?? "git") : account.username
             return GitCredential(username: username, password: token)

@@ -77,6 +77,17 @@ import Testing
         #expect(provider("https://github.com/a/b", nil) == nil)
     }
 
+    @Test func tokenIsNeverGivenToAnotherHost() throws {
+        let f = Fixture()
+        let account = try f.store.add(Self.github("berk"), token: "secret")
+        let provider = f.store.credentialProvider(for: account)
+        #expect(provider("https://github.com/a/b.git", nil)?.password == "secret")
+        // e.g. a redirect from github.com to somewhere else
+        #expect(provider("https://evil.example.com/a/b.git", nil) == nil)
+        #expect(provider("https://github.com.evil.example.com/a/b.git", nil) == nil)
+        #expect(provider("not a url", nil) == nil)
+    }
+
     @Test func providerDefaults() {
         #expect(HostingProvider.guess(forHost: "gitlab.example.com") == .gitlab)
         #expect(HostingProvider.guess(forHost: "github.com") == .github)

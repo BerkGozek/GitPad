@@ -2,8 +2,8 @@
 
 Last updated: 2026-11-11.
 
-Current phase: **3 (Remote Sync)**, code complete; waiting on a check on the real iPad.
-Next: on-device check of accounts + push, then Phase 4 (GitHub sign-in via device flow once a Client ID exists, README, UI tests, polish).
+Current phase: **3 (Remote Sync) complete and verified on the iPad**: private clone, external edit → Changes, commit, push, Files integration.
+Next: Phase 4. GitHub sign-in via device flow (needs a Client ID from Berk), more UI tests, polish. README is done. TestFlight is blocked on a paid/education team.
 
 ## Verification summary
 
@@ -40,5 +40,6 @@ Next: on-device check of accounts + push, then Phase 4 (GitHub sign-in via devic
 - Xcode showed "Missing package product 'GitPadCore'" after the package had been opened in a separate window; fixed by restarting Xcode (stale package graph, project was fine).
 
 ## Needs a real iPad
-- Editing a repo file in another app, returning, seeing it in Changes.
-- Opening a whole repository folder in third-party editors (expected to work for editors that support folders via Files; not verified).
+Nothing open. Tested on Berk's iPad (2026-11-11, reported by Berk):
+- Editing a repo file in another app, returning to GitPad, and seeing it in Changes ✅
+- Opening a whole repository folder in a third-party editor via Files ✅

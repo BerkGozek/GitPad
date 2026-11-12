@@ -11,8 +11,17 @@ struct CloneView: View {
     @State private var progress: TransferProgress?
     @State private var errorMessage: String?
     @State private var cloneTask: Task<Void, Never>?
+    @State private var accountID: UUID?
+    @State private var showingAddAccount = false
 
     private var isCloning: Bool { cloneTask != nil }
+
+    private var host: String? { AccountStore.host(of: urlText) }
+
+    private var matchingAccounts: [Account] {
+        guard let host else { return [] }
+        return app.accounts.filter { $0.host == host }
+    }
 
     private var canClone: Bool {
         !isCloning && URL(string: urlText.trimmingCharacters(in: .whitespaces))?.scheme?.hasPrefix("http") == true
@@ -30,11 +39,26 @@ struct CloneView: View {
                         .autocorrectionDisabled()
                         .onChange(of: urlText) { _, new in
                             if !nameEdited { name = app.store.suggestedName(for: new) }
+                            // Pick the account automatically when exactly one matches the host.
+                            if !matchingAccounts.contains(where: { $0.id == accountID }) {
+                                accountID = matchingAccounts.count == 1 ? matchingAccounts[0].id : nil
+                            }
                         }
                 } header: {
                     Text("Repository URL")
                 } footer: {
-                    Text("HTTPS URLs from GitHub, GitLab, Bitbucket or any Git server. Private repositories need an account, which comes in the next update.")
+                    Text("HTTPS URLs from GitHub, GitLab, Bitbucket or any Git server.")
+                }
+
+                Section {
+                    AccountPicker(accounts: matchingAccounts, selection: $accountID)
+                    Button("Add Account…", systemImage: "plus") { showingAddAccount = true }
+                } header: {
+                    Text("Account")
+                } footer: {
+                    Text(matchingAccounts.isEmpty
+                         ? "Public repositories need no account. For private ones, add an account for \(host ?? "the host") first."
+                         : "Used for private repositories, and later for pushing.")
                 }
 
                 Section("Folder Name") {
@@ -78,6 +102,12 @@ struct CloneView: View {
                 }
             }
             .interactiveDismissDisabled(isCloning)
+            .sheet(isPresented: $showingAddAccount) {
+                AddAccountView(suggestedHost: host)
+            }
+            .onChange(of: app.accounts) { _, _ in
+                if accountID == nil, matchingAccounts.count == 1 { accountID = matchingAccounts[0].id }
+            }
         }
     }
 
@@ -99,17 +129,26 @@ struct CloneView: View {
         let url = urlText
         let folder = name
         let store = app.store
+        let account = app.accounts.first { $0.id == accountID }
+        let credentials = account.map { app.accountStore.credentialProvider(for: $0) }
         cloneTask = Task {
             do {
-                let repository = try await store.clone(from: url, name: folder, progress: { value in
+                let repository = try await store.clone(from: url, name: folder, credentials: credentials, progress: { value in
                     Task { @MainActor in progress = value }
                 })
+                if let account {
+                    try? app.accountStore.assign(account.id, toRepository: repository.name)
+                }
                 app.didClone(repository)
                 dismiss()
             } catch is CancellationError {
                 errorMessage = "Clone stopped. Nothing was saved."
             } catch GitError.cancelled {
                 errorMessage = "Clone stopped. Nothing was saved."
+            } catch GitError.authenticationFailed {
+                errorMessage = account == nil
+                    ? "This repository is private or doesn't exist. Choose or add an account for \(host ?? "this host")."
+                    : "The server rejected the account's token. Check that it hasn't expired and can read this repository."
             } catch {
                 errorMessage = Redactor.redact(error.localizedDescription)
             }

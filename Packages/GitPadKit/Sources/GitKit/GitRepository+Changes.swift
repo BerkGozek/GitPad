@@ -232,6 +232,46 @@ extension GitRepository {
         return commits
     }
 
+    /// Commits on the current branch that a push would send: those not on its upstream, or,
+    /// if it has none yet, those not on any remote-tracking branch.
+    public func outgoingCommits(limit: Int = 200) throws -> [CommitInfo] {
+        guard git_repository_head_unborn(handle) == 0 else { return [] }
+        var walker: OpaquePointer?
+        try LibGit2.check(git_revwalk_new(&walker, handle))
+        defer { git_revwalk_free(walker) }
+        try LibGit2.check(git_revwalk_sorting(walker, GIT_SORT_TOPOLOGICAL.rawValue | GIT_SORT_TIME.rawValue))
+        try LibGit2.check(git_revwalk_push_head(walker))
+
+        var hidUpstream = false
+        if let branch = try head().branch {
+            var local: OpaquePointer?
+            if git_branch_lookup(&local, handle, branch, GIT_BRANCH_LOCAL) == 0 {
+                defer { git_reference_free(local) }
+                var upstream: OpaquePointer?
+                if git_branch_upstream(&upstream, local) == 0 {
+                    defer { git_reference_free(upstream) }
+                    if let target = git_reference_target(upstream) {
+                        try LibGit2.check(git_revwalk_hide(walker, target))
+                        hidUpstream = true
+                    }
+                }
+            }
+        }
+        if !hidUpstream {
+            let code = git_revwalk_hide_glob(walker, "refs/remotes/*")
+            if code != GIT_ENOTFOUND.rawValue { try LibGit2.check(code) }
+        }
+
+        var commits: [CommitInfo] = []
+        var oid = git_oid()
+        while commits.count < limit, git_revwalk_next(&oid, walker) == 0 {
+            let commit = try lookupCommit(oid)
+            defer { git_commit_free(commit) }
+            commits.append(commitInfo(commit, id: oid))
+        }
+        return commits
+    }
+
     func commitInfo(_ commit: OpaquePointer, id: git_oid) -> CommitInfo {
         let author = git_commit_author(commit)?.pointee
         let parents = (0..<git_commit_parentcount(commit)).compactMap { git_commit_parent_id(commit, $0)?.pointee.hexString }

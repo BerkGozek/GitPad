@@ -6,6 +6,7 @@ struct RepositoryView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.openURL) private var openURL
     @State private var tab: Tab = .files
+    @State private var showingPush = false
 
     enum Tab: String, CaseIterable, Identifiable {
         case files = "Files", changes = "Changes", history = "History", branches = "Branches"
@@ -54,6 +55,15 @@ struct RepositoryView: View {
                 Button("Pull", systemImage: "arrow.down.to.line") { model.pull() }
                     .disabled(model.isBusy || model.remotes.isEmpty || model.head?.branch == nil)
                     .keyboardShortcut("p", modifiers: [.command, .shift])
+                Button {
+                    showingPush = true
+                } label: {
+                    Label(model.outgoing.isEmpty ? "Push" : "Push (\(model.outgoing.count))", systemImage: "arrow.up.to.line")
+                }
+                .badge(model.outgoing.count)
+                .disabled(model.isBusy || model.remotes.isEmpty || model.head?.branch == nil)
+                .keyboardShortcut("u", modifiers: [.command, .shift])
+                .help("Push commits (⇧⌘U)")
                 Button("Refresh", systemImage: "arrow.clockwise") { Task { await model.refresh() } }
                     .keyboardShortcut("r", modifiers: .command)
                 if let url = model.repository.url.filesAppURL {
@@ -65,6 +75,15 @@ struct RepositoryView: View {
         .onChange(of: scenePhase) { _, phase in
             // Pick up edits made in other apps while GitPad was in the background.
             if phase == .active { Task { await model.refresh() } }
+        }
+        .sheet(isPresented: $showingPush) {
+            PushView(model: model)
+        }
+        .alert("Push Rejected", isPresented: $model.pushNeedsPull) {
+            Button("Pull Now") { model.pull() }
+            Button("Not Now", role: .cancel) {}
+        } message: {
+            Text("The remote has commits you don't have yet, so pushing would overwrite them. GitPad never force-pushes. Pull first (your commits are kept and merged), then push again.")
         }
         .alert("Something went wrong", isPresented: Binding(get: { model.errorMessage != nil }, set: { if !$0 { model.errorMessage = nil } })) {
             Button("OK", role: .cancel) {}

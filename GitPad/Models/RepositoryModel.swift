@@ -6,7 +6,11 @@ import Observation
 @MainActor @Observable
 final class RepositoryModel {
     let repository: LocalRepository
+    private weak var app: AppModel?
     private var git: GitRepository?
+    private(set) var outgoing: [CommitInfo] = []
+    /// Set when a push was rejected because the remote has new commits; the UI offers "Pull".
+    var pushNeedsPull = false
 
     private(set) var head: HeadInfo?
     private(set) var state: RepositoryState = .clean
@@ -30,8 +34,50 @@ final class RepositoryModel {
     var currentBranch: BranchInfo? { branches.first { $0.isHead && !$0.isRemote } }
     var isBusy: Bool { activity != nil }
 
-    init(repository: LocalRepository) {
+    init(repository: LocalRepository, app: AppModel) {
         self.repository = repository
+        self.app = app
+    }
+
+    // MARK: - Accounts
+
+    /// The remote we sync with: the current branch's remote, else `origin`, else the first one.
+    var primaryRemote: RemoteInfo? {
+        let wanted = currentBranch?.upstream?.split(separator: "/").first.map(String.init) ?? "origin"
+        return remotes.first { $0.name == wanted } ?? remotes.first
+    }
+
+    var remoteHost: String? {
+        primaryRemote.flatMap { AccountStore.host(of: $0.url) }
+    }
+
+    /// Accounts whose host matches this repository's remote.
+    var candidateAccounts: [Account] {
+        guard let host = remoteHost, let app else { return [] }
+        return app.accounts.filter { $0.host == host }
+    }
+
+    /// The account used for network operations, or nil (public access).
+    /// Throws `.chooseAccount` when several match and the user hasn't picked one.
+    func resolvedAccount() throws -> Account? {
+        guard let app, let remote = primaryRemote else { return nil }
+        return try app.accountStore.resolveAccount(forRemote: remote.url, repository: repository.name)
+    }
+
+    var selectedAccountID: UUID? {
+        get { (try? resolvedAccount())?.id }
+        set {
+            try? app?.accountStore.assign(newValue, toRepository: repository.name)
+        }
+    }
+
+    private func credentials(required: Bool) throws -> CredentialProvider? {
+        guard let app else { return nil }
+        guard let account = try resolvedAccount() else {
+            if required { throw AccountError.noAccount(host: remoteHost ?? "this server") }
+            return nil
+        }
+        return app.accountStore.credentialProvider(for: account)
     }
 
     // MARK: - Refresh
@@ -48,6 +94,7 @@ final class RepositoryModel {
             commits = try await git.log(limit: 300)
             branches = try await git.branches()
             remotes = try await git.remotes()
+            outgoing = try await git.outgoingCommits()
             lastRefresh = .now
         } catch {
             show(error)
@@ -117,15 +164,25 @@ final class RepositoryModel {
 
     func fetch() {
         runNetwork("Fetching") { git, progress in
-            try await git.fetch(progress: progress)
+            try await git.fetch(credentials: self.credentials(required: false), progress: progress)
             self.lastFetch = .now
             self.infoMessage = "Fetched."
         }
     }
 
+    /// Pushes the current branch. Never forced: a rejection is explained and offers a pull.
+    func push() {
+        let count = outgoing.count
+        runNetwork("Pushing") { git, progress in
+            try await git.push(credentials: self.credentials(required: true), progress: progress)
+            self.infoMessage = count == 1 ? "Pushed 1 commit." : "Pushed \(count) commits."
+        }
+    }
+
     func pull() {
+        pushNeedsPull = false
         runNetwork("Pulling") { git, progress in
-            let result = try await git.pull(author: CommitIdentity.current, progress: progress)
+            let result = try await git.pull(credentials: self.credentials(required: false), author: CommitIdentity.current, progress: progress)
             self.lastFetch = .now
             switch result {
             case .upToDate: self.infoMessage = "Already up to date."
@@ -173,10 +230,21 @@ final class RepositoryModel {
     }
 
     private func show(_ error: Error) {
-        if let gitError = error as? GitError, gitError == .cancelled {
+        switch error as? GitError {
+        case .cancelled?:
             infoMessage = "Cancelled."
             return
+        case .pushRejectedNonFastForward?:
+            pushNeedsPull = true
+            return
+        case .authenticationFailed?:
+            let hint = (try? resolvedAccount()) == nil
+                ? "This repository needs an account. Add one in Settings → Accounts."
+                : "Check that the token is valid, not expired, and has write access to this repository."
+            errorMessage = "Authentication failed. \(hint)"
+            return
+        default:
+            errorMessage = Redactor.redact(error.localizedDescription)
         }
-        errorMessage = Redactor.redact(error.localizedDescription)
     }
 }

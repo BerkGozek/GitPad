@@ -25,6 +25,8 @@ struct SettingsView: View {
                     Text("Used as the author of commits you make on this iPad. Use the email your Git host knows, so commits link to your account.")
                 }
 
+                AccountsSection()
+
                 Section {
                     LabeledContent("Location", value: "On My iPad › GitPad › Repositories")
                     if let url = app.store.repositoriesURL.filesAppURL {

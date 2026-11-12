@@ -11,7 +11,9 @@
 		2B2F309C39CD0AB0B5764A31 /* GitPadCore in Frameworks */ = {isa = PBXBuildFile; productRef = F5CA48597026996E09FB3874 /* GitPadCore */; };
 		2B62D5B4FEFCBA270CE720DC /* GitPadApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA15B4F36DC57696041E69A /* GitPadApp.swift */; };
 		39377720099BEC55DCD79F21 /* HistoryBranchesViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2005166BE4420E9D0B25E44 /* HistoryBranchesViews.swift */; };
+		3E8F62705F06847EC0906088 /* AccountsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5686E5734BA345DAAC9FEE95 /* AccountsViews.swift */; };
 		562F8B51B67C31B8FC036F22 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0163E252D59BB78ED468E36F /* AppModel.swift */; };
+		61E129FA9F9BC316395B1638 /* PushView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0B203C2CE6276616390C7D /* PushView.swift */; };
 		6BEDCD119C2CA11B5485C673 /* CloneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFA4ED5F2A20CD98AA66A68 /* CloneView.swift */; };
 		6E43EC4CD1FF580CD1609C2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 941A396EA4871BC4B2E5168C /* Assets.xcassets */; };
 		720618EA07CE4242B5C17CC3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1011615382D8B3C250D5F4 /* SettingsView.swift */; };
@@ -26,6 +28,7 @@
 		0E4780CDB5F825DA2B750CF2 /* GitPad.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = GitPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17BC2D17A009D3291234A298 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		23E2A21CF0A7FB326DCA9166 /* ChangesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangesView.swift; sourceTree = "<group>"; };
+		5686E5734BA345DAAC9FEE95 /* AccountsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViews.swift; sourceTree = "<group>"; };
 		61EFFF5A1567A75D67ECA1CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6EFA4ED5F2A20CD98AA66A68 /* CloneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloneView.swift; sourceTree = "<group>"; };
 		7FDE35061562132AF2B51FBB /* RepositoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryModel.swift; sourceTree = "<group>"; };
@@ -34,6 +37,7 @@
 		941A396EA4871BC4B2E5168C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A2EF06631C267F2187FE4AD2 /* FileBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileBrowserView.swift; sourceTree = "<group>"; };
 		BBA15B4F36DC57696041E69A /* GitPadApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitPadApp.swift; sourceTree = "<group>"; };
+		CB0B203C2CE6276616390C7D /* PushView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushView.swift; sourceTree = "<group>"; };
 		D2005166BE4420E9D0B25E44 /* HistoryBranchesViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryBranchesViews.swift; sourceTree = "<group>"; };
 		DE36DE908552B7D23DA5F49D /* RepositoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,11 +94,13 @@
 		AAF2225D0446B0E923B1DA7F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5686E5734BA345DAAC9FEE95 /* AccountsViews.swift */,
 				23E2A21CF0A7FB326DCA9166 /* ChangesView.swift */,
 				6EFA4ED5F2A20CD98AA66A68 /* CloneView.swift */,
 				17BC2D17A009D3291234A298 /* ContentView.swift */,
 				A2EF06631C267F2187FE4AD2 /* FileBrowserView.swift */,
 				D2005166BE4420E9D0B25E44 /* HistoryBranchesViews.swift */,
+				CB0B203C2CE6276616390C7D /* PushView.swift */,
 				DE36DE908552B7D23DA5F49D /* RepositoryView.swift */,
 				8E1011615382D8B3C250D5F4 /* SettingsView.swift */,
 			);
@@ -186,6 +192,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E8F62705F06847EC0906088 /* AccountsViews.swift in Sources */,
 				562F8B51B67C31B8FC036F22 /* AppModel.swift in Sources */,
 				2A625E585788E9B1AD4D80B6 /* ChangesView.swift in Sources */,
 				6BEDCD119C2CA11B5485C673 /* CloneView.swift in Sources */,
@@ -193,6 +200,7 @@
 				77960C400D44C1AF6AAF753D /* FileBrowserView.swift in Sources */,
 				2B62D5B4FEFCBA270CE720DC /* GitPadApp.swift in Sources */,
 				39377720099BEC55DCD79F21 /* HistoryBranchesViews.swift in Sources */,
+				61E129FA9F9BC316395B1638 /* PushView.swift in Sources */,
 				878708E4E49C851405A1BC53 /* RepositoryModel.swift in Sources */,
 				C041021E3D853C65484F10E2 /* RepositoryView.swift in Sources */,
 				720618EA07CE4242B5C17CC3 /* SettingsView.swift in Sources */,

@@ -7,6 +7,9 @@ public enum GitError: Error, Equatable, Sendable {
     case cancelled
     /// The server refused the credentials, or no credentials were available for a private repository.
     case authenticationFailed(String)
+    /// The credentials were accepted but don't allow this operation (HTTP 403), e.g. a token
+    /// without write access pushing.
+    case permissionDenied(String)
     /// The TLS certificate could not be verified.
     case certificateInvalid(String)
     /// Checkout/merge would overwrite uncommitted local changes, so nothing was changed.
@@ -48,6 +51,7 @@ public enum GitError: Error, Equatable, Sendable {
             if context.authenticationGaveUp { return .authenticationFailed(message) }
             if !context.rejectedRefs.isEmpty { return .pushRejected(context.rejectedRefs) }
         }
+        if let http = classifyHTTPStatus(in: message) { return http }
         switch code {
         case GIT_EUSER.rawValue: return .cancelled
         case GIT_EAUTH.rawValue: return .authenticationFailed(message)
@@ -59,18 +63,24 @@ public enum GitError: Error, Equatable, Sendable {
         case GIT_EUNBORNBRANCH.rawValue: return .unbornBranch
         default: break
         }
-        if klass == Int32(GIT_ERROR_NET.rawValue) || klass == Int32(GIT_ERROR_SSL.rawValue) {
-            // HTTP 401/403 surface as network-class errors on some servers.
-            let lowered = message.lowercased()
-            if lowered.contains("401") || lowered.contains("403") || lowered.contains("authentication") {
-                return .authenticationFailed(message)
-            }
+        if klass == Int32(GIT_ERROR_NET.rawValue) || klass == Int32(GIT_ERROR_SSL.rawValue) || klass == Int32(GIT_ERROR_HTTP.rawValue) {
+            if message.lowercased().contains("authentication") { return .authenticationFailed(message) }
             return .network(message)
         }
         if klass == Int32(GIT_ERROR_REPOSITORY.rawValue) || klass == Int32(GIT_ERROR_ODB.rawValue) {
             return .invalidRepository(message)
         }
         return .libgit2(code: code, message: message)
+    }
+
+    /// libgit2 reports HTTP failures as text ("unexpected http status code: 403") with an error
+    /// class that varies by transport, so match on the status in the message.
+    static func classifyHTTPStatus(in message: String) -> GitError? {
+        let lowered = message.lowercased()
+        guard lowered.contains("http") || lowered.contains("status") else { return nil }
+        if lowered.range(of: #"\b403\b"#, options: .regularExpression) != nil { return .permissionDenied(message) }
+        if lowered.range(of: #"\b401\b"#, options: .regularExpression) != nil { return .authenticationFailed(message) }
+        return nil
     }
 }
 
@@ -79,6 +89,7 @@ extension GitError: LocalizedError {
         switch self {
         case .cancelled: "The operation was cancelled."
         case .authenticationFailed(let m): "Authentication failed. Check the account and token for this host. (\(m))"
+        case .permissionDenied: "The server accepted your credentials but they don't allow this (HTTP 403). For a push, the token needs write access to this repository."
         case .certificateInvalid(let m): "The server's certificate could not be verified. (\(m))"
         case .localChangesWouldBeOverwritten: "Your uncommitted changes would be overwritten. Commit or discard them first; nothing was changed."
         case .pushRejectedNonFastForward: "The remote has commits you don't have yet. Pull first, then push again."

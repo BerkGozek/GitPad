@@ -243,6 +243,13 @@ final class RepositoryModel {
                 : "Check that the token is valid, not expired, and has write access to this repository."
             errorMessage = "Authentication failed. \(hint)"
             return
+        case .permissionDenied?:
+            let account = try? resolvedAccount()
+            let fix = account?.provider == .github
+                ? "On github.com: Settings → Developer settings → your token → Edit. Under Repository access include \(repository.name), and set Contents to “Read and write”. The token itself doesn't change, so just push again."
+                : "Give the token write access to this repository on \(remoteHost ?? "the server"), then push again."
+            errorMessage = "Your token is valid but isn't allowed to push here (HTTP 403). \(fix)"
+            return
         default:
             errorMessage = Redactor.redact(error.localizedDescription)
         }

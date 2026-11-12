@@ -36,7 +36,7 @@
 
 /* Begin PBXFileReference section */
 		0163E252D59BB78ED468E36F /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
-		0E4780CDB5F825DA2B750CF2 /* GitPad.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = GitPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E4780CDB5F825DA2B750CF2 /* GitPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17BC2D17A009D3291234A298 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		23E2A21CF0A7FB326DCA9166 /* ChangesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangesView.swift; sourceTree = "<group>"; };
 		41E03AF1A10C2AC5FB5D78DF /* AccountFlowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountFlowUITests.swift; sourceTree = "<group>"; };
@@ -195,7 +195,6 @@
 						TestTargetID = F46AF9A9B905B04E4E154BB7;
 					};
 					F46AF9A9B905B04E4E154BB7 = {
-						DevelopmentTeam = KBT99X57V8;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -364,7 +363,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KBT99X57V8;
+				DEVELOPMENT_TEAM = 7WRYR7WZJR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GitPad/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = GitPad;
@@ -408,7 +407,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KBT99X57V8;
+				DEVELOPMENT_TEAM = 7WRYR7WZJR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GitPad/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = GitPad;

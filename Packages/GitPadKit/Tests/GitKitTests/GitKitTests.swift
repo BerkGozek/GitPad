@@ -288,6 +288,16 @@ final class Sandbox {
     }
 }
 
+@Suite struct HTTPErrorClassificationTests {
+    @Test func classifiesStatusCodes() {
+        #expect(GitError.classifyHTTPStatus(in: "unexpected http status code: 403") == .permissionDenied("unexpected http status code: 403"))
+        #expect(GitError.classifyHTTPStatus(in: "unexpected http status code: 401") == .authenticationFailed("unexpected http status code: 401"))
+        #expect(GitError.classifyHTTPStatus(in: "unexpected http status code: 404") == nil)
+        // A "403" that isn't an HTTP status (e.g. in a path) isn't misread.
+        #expect(GitError.classifyHTTPStatus(in: "failed to read object 4031abc") == nil)
+    }
+}
+
 @Suite struct RedactorTests {
     @Test func redactsURLCredentials() {
         #expect(Redactor.redact("failed: https://bob:s3cret@github.com/x.git") == "failed: https://***@github.com/x.git")

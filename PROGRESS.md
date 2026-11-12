@@ -18,7 +18,7 @@ Next: on-device check of accounts + push, then Phase 4 (GitHub sign-in via devic
 
 ## Verified on Berk's iPad Air (5th gen, iPadOS 26)
 - Phase 1 build installed from Xcode; cloned `BerkGozek/Testing-Repository` over HTTPS ✅
-- Repositories did **not** appear in Files ❌ → fixed (see below), needs re-check.
+- Repositories did **not** appear in Files at first ❌ → fixed (see below); **confirmed on the iPad: repositories now show in Files → On My iPad → GitPad → Repositories** ✅
 - 2026-11-11: added a GitHub fine-grained token, committed and **pushed to `Testing-Repository` from the iPad** ✅ (Phase 3 success criterion). First attempt got HTTP 403 because the new token had GitHub's read-only defaults; fixed on GitHub (Contents: Read and write), and the app now explains 403s.
 
 ## App Store / TestFlight readiness
@@ -40,7 +40,5 @@ Next: on-device check of accounts + push, then Phase 4 (GitHub sign-in via devic
 - Xcode showed "Missing package product 'GitPadCore'" after the package had been opened in a separate window; fixed by restarting Xcode (stale package graph, project was fine).
 
 ## Needs a real iPad
-- Repos visible in Files after the Info.plist fix.
 - Editing a repo file in another app, returning, seeing it in Changes.
-- Adding an account (Keychain on device), pushing to `Testing-Repository`.
 - Opening a whole repository folder in third-party editors (expected to work for editors that support folders via Files; not verified).

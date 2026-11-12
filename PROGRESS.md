@@ -19,6 +19,13 @@ Next: on-device check of accounts + push, then Phase 4 (GitHub sign-in via devic
 ## Verified on Berk's iPad Air (5th gen, iPadOS 26)
 - Phase 1 build installed from Xcode; cloned `BerkGozek/Testing-Repository` over HTTPS ✅
 - Repositories did **not** appear in Files ❌ → fixed (see below), needs re-check.
+- 2026-11-11: added a GitHub fine-grained token, committed and **pushed to `Testing-Repository` from the iPad** ✅ (Phase 3 success criterion). First attempt got HTTP 403 because the new token had GitHub's read-only defaults; fixed on GitHub (Contents: Read and write), and the app now explains 403s.
+
+## App Store / TestFlight readiness
+- App icon: 1024×1024, no alpha (`scripts/make-icon.swift`) ✅
+- `PrivacyInfo.xcprivacy`: no tracking/collection; UserDefaults CA92.1, FileTimestamp C617.1, SystemBootTime 35F9.1 ✅ (in the built app)
+- `ITSAppUsesNonExemptEncryption = NO` (standard HTTPS only) ✅
+- Archive + upload: ⏸ not done (needs a paid Apple Developer Program team and an App Store Connect app record)
 
 ## Bugs caught and fixed
 - Add Account closed itself (and Settings) right after opening, found by Berk on the iPad. The sheet was attached to a Form section inside the Settings sheet; SwiftUI tears such sections down on re-render. Now presented from the Settings screen; reproduced and verified with a UI test.

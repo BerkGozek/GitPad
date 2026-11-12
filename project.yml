@@ -23,6 +23,9 @@ targets:
       properties:
         UIFileSharingEnabled: true
         LSSupportsOpeningDocumentsInPlace: true
+        # Only Apple's standard HTTPS/TLS is used (exempt), so App Store Connect
+        # doesn't ask the export-compliance question for every build.
+        ITSAppUsesNonExemptEncryption: false
     dependencies:
       - package: GitPadKit
         product: GitPadCore

@@ -15,13 +15,16 @@
 		39377720099BEC55DCD79F21 /* HistoryBranchesViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2005166BE4420E9D0B25E44 /* HistoryBranchesViews.swift */; };
 		3E8F62705F06847EC0906088 /* AccountsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5686E5734BA345DAAC9FEE95 /* AccountsViews.swift */; };
 		562F8B51B67C31B8FC036F22 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0163E252D59BB78ED468E36F /* AppModel.swift */; };
+		60A7B1DD7D3BF0BEC20A5C1E /* libgit2-COPYING.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0815CBA89EA711A273115D49 /* libgit2-COPYING.txt */; };
 		61E129FA9F9BC316395B1638 /* PushView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0B203C2CE6276616390C7D /* PushView.swift */; };
 		6BEDCD119C2CA11B5485C673 /* CloneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFA4ED5F2A20CD98AA66A68 /* CloneView.swift */; };
 		6E43EC4CD1FF580CD1609C2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 941A396EA4871BC4B2E5168C /* Assets.xcassets */; };
 		720618EA07CE4242B5C17CC3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1011615382D8B3C250D5F4 /* SettingsView.swift */; };
 		77960C400D44C1AF6AAF753D /* FileBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EF06631C267F2187FE4AD2 /* FileBrowserView.swift */; };
+		7798229C490AE605D6C6062F /* ScreenshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E07E499D57853D1733A578 /* ScreenshotUITests.swift */; };
 		878708E4E49C851405A1BC53 /* RepositoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDE35061562132AF2B51FBB /* RepositoryModel.swift */; };
 		C041021E3D853C65484F10E2 /* RepositoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE36DE908552B7D23DA5F49D /* RepositoryView.swift */; };
+		ED6683793F4882DF7D9F47E3 /* AcknowledgementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF048022F4A7BDFB93A715D /* AcknowledgementsView.swift */; };
 		F19AF1CDF45DDA67F135B553 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BC2D17A009D3291234A298 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,12 +40,14 @@
 
 /* Begin PBXFileReference section */
 		0163E252D59BB78ED468E36F /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		0815CBA89EA711A273115D49 /* libgit2-COPYING.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "libgit2-COPYING.txt"; sourceTree = "<group>"; };
 		0E4780CDB5F825DA2B750CF2 /* GitPad.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = GitPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17BC2D17A009D3291234A298 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		23E2A21CF0A7FB326DCA9166 /* ChangesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangesView.swift; sourceTree = "<group>"; };
 		41E03AF1A10C2AC5FB5D78DF /* AccountFlowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountFlowUITests.swift; sourceTree = "<group>"; };
 		5686E5734BA345DAAC9FEE95 /* AccountsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViews.swift; sourceTree = "<group>"; };
 		61EFFF5A1567A75D67ECA1CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		6AF048022F4A7BDFB93A715D /* AcknowledgementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementsView.swift; sourceTree = "<group>"; };
 		6EFA4ED5F2A20CD98AA66A68 /* CloneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloneView.swift; sourceTree = "<group>"; };
 		7FDE35061562132AF2B51FBB /* RepositoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryModel.swift; sourceTree = "<group>"; };
 		8305234CA82B1CFEA59EB098 /* GitPadKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = GitPadKit; path = Packages/GitPadKit; sourceTree = SOURCE_ROOT; };
@@ -50,6 +55,7 @@
 		9332EE142335150CF0C42533 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		941A396EA4871BC4B2E5168C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A2EF06631C267F2187FE4AD2 /* FileBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileBrowserView.swift; sourceTree = "<group>"; };
+		A4E07E499D57853D1733A578 /* ScreenshotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotUITests.swift; sourceTree = "<group>"; };
 		BBA15B4F36DC57696041E69A /* GitPadApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitPadApp.swift; sourceTree = "<group>"; };
 		CB0B203C2CE6276616390C7D /* PushView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushView.swift; sourceTree = "<group>"; };
 		D2005166BE4420E9D0B25E44 /* HistoryBranchesViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryBranchesViews.swift; sourceTree = "<group>"; };
@@ -86,6 +92,7 @@
 				61EFFF5A1567A75D67ECA1CF /* Info.plist */,
 				9332EE142335150CF0C42533 /* PrivacyInfo.xcprivacy */,
 				F51C0E052125FE1E93F55ED7 /* Models */,
+				94FE5857D13546C9A5A50A45 /* Resources */,
 				AAF2225D0446B0E923B1DA7F /* Views */,
 			);
 			path = GitPad;
@@ -109,10 +116,19 @@
 			path = Packages;
 			sourceTree = "<group>";
 		};
+		94FE5857D13546C9A5A50A45 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0815CBA89EA711A273115D49 /* libgit2-COPYING.txt */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		AAF2225D0446B0E923B1DA7F /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				5686E5734BA345DAAC9FEE95 /* AccountsViews.swift */,
+				6AF048022F4A7BDFB93A715D /* AcknowledgementsView.swift */,
 				23E2A21CF0A7FB326DCA9166 /* ChangesView.swift */,
 				6EFA4ED5F2A20CD98AA66A68 /* CloneView.swift */,
 				17BC2D17A009D3291234A298 /* ContentView.swift */,
@@ -129,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				41E03AF1A10C2AC5FB5D78DF /* AccountFlowUITests.swift */,
+				A4E07E499D57853D1733A578 /* ScreenshotUITests.swift */,
 			);
 			path = GitPadUITests;
 			sourceTree = "<group>";
@@ -193,12 +210,12 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					7D65E3539958004CB052DE1F = {
-						DevelopmentTeam = KBT99X57V8;
+						DevelopmentTeam = 7WRYR7WZJR;
 						ProvisioningStyle = Automatic;
 						TestTargetID = F46AF9A9B905B04E4E154BB7;
 					};
 					F46AF9A9B905B04E4E154BB7 = {
-						DevelopmentTeam = KBT99X57V8;
+						DevelopmentTeam = 7WRYR7WZJR;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -233,6 +250,7 @@
 			files = (
 				6E43EC4CD1FF580CD1609C2E /* Assets.xcassets in Resources */,
 				1D209891CEE528EE00A39F64 /* PrivacyInfo.xcprivacy in Resources */,
+				60A7B1DD7D3BF0BEC20A5C1E /* libgit2-COPYING.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				29E491FE4308D60A33330B82 /* AccountFlowUITests.swift in Sources */,
+				7798229C490AE605D6C6062F /* ScreenshotUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E8F62705F06847EC0906088 /* AccountsViews.swift in Sources */,
+				ED6683793F4882DF7D9F47E3 /* AcknowledgementsView.swift in Sources */,
 				562F8B51B67C31B8FC036F22 /* AppModel.swift in Sources */,
 				2A625E585788E9B1AD4D80B6 /* ChangesView.swift in Sources */,
 				6BEDCD119C2CA11B5485C673 /* CloneView.swift in Sources */,
@@ -282,7 +302,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KBT99X57V8;
+				DEVELOPMENT_TEAM = 7WRYR7WZJR;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -368,7 +388,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KBT99X57V8;
+				DEVELOPMENT_TEAM = 7WRYR7WZJR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GitPad/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = GitPad;
@@ -391,7 +411,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KBT99X57V8;
+				DEVELOPMENT_TEAM = 7WRYR7WZJR;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -412,7 +432,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KBT99X57V8;
+				DEVELOPMENT_TEAM = 7WRYR7WZJR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GitPad/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = GitPad;

@@ -25,9 +25,16 @@ Next: on-device check of accounts + push, then Phase 4 (GitHub sign-in via devic
 - App icon: 1024×1024, no alpha (`scripts/make-icon.swift`) ✅
 - `PrivacyInfo.xcprivacy`: no tracking/collection; UserDefaults CA92.1, FileTimestamp C617.1, SystemBootTime 35F9.1 ✅ (in the built app)
 - `ITSAppUsesNonExemptEncryption = NO` (standard HTTPS only) ✅
-- Archive + upload: ⏸ not done (needs a paid Apple Developer Program team and an App Store Connect app record)
+- Archive + upload: ⏸ not possible yet. The project's team is `7WRYR7WZJR` "Berk Gozek (Personal Team)", a **free** team, which can't use TestFlight. Needs a paid Apple Developer Program membership.
+
+## Docs and licensing
+- `README.md` with screenshots captured by `ScreenshotUITests` (opt-in, `TEST_RUNNER_SCREENSHOT_DIR=…`).
+- `THIRD_PARTY_NOTICES.md` + in-app Settings → Acknowledgements (full libgit2 license text bundled).
+  libgit2 is GPL v2 + linking exception; bundled xdiff is **LGPL 2.1+** (statically linked; satisfied by the public source).
 
 ## Bugs caught and fixed
+- Typing a clone URL froze the folder name at its first character (a repo got cloned as "h"). The name field's `onChange` counted the app's own auto-fill as a manual edit; caught by the screenshot UI test, which now asserts the name. Pasting a URL (as on the iPad) didn't trigger it.
+- One simulator clone run failed without a visible error and didn't reproduce on the next run; cause not found (possibly network). Watch for it.
 - Add Account closed itself (and Settings) right after opening, found by Berk on the iPad. The sheet was attached to a Form section inside the Settings sheet; SwiftUI tears such sections down on re-render. Now presented from the Settings screen; reproduced and verified with a UI test.
 - `INFOPLIST_KEY_UIFileSharingEnabled` was silently dropped from the generated Info.plist, so the app's folder never showed in Files → On My iPad. Both Files keys now live in `GitPad/Info.plist`; verified in the built app's Info.plist.
 - Xcode showed "Missing package product 'GitPadCore'" after the package had been opened in a separate window; fixed by restarting Xcode (stale package graph, project was fine).

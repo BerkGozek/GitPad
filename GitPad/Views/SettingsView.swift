@@ -43,6 +43,7 @@ struct SettingsView: View {
                 Section("About") {
                     LabeledContent("Version", value: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "?")
                     LabeledContent("libgit2", value: libgit2Version())
+                    NavigationLink("Acknowledgements") { AcknowledgementsView() }
                 }
             }
             .accountsPresentation(showingAdd: $showingAddAccount, pendingRemoval: $pendingAccountRemoval, app: app)

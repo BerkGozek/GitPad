@@ -34,7 +34,7 @@ targets:
         # Keep these two fixed: a different team or bundle ID makes iPadOS treat it as a new app,
         # and removing the old one deletes every repository cloned into it.
         PRODUCT_BUNDLE_IDENTIFIER: com.berkgozek.GitPad
-        DEVELOPMENT_TEAM: KBT99X57V8
+        DEVELOPMENT_TEAM: 7WRYR7WZJR
         CODE_SIGN_STYLE: Automatic
         TARGETED_DEVICE_FAMILY: "2"
         GENERATE_INFOPLIST_FILE: YES
@@ -53,7 +53,7 @@ targets:
     settings:
       base:
         GENERATE_INFOPLIST_FILE: YES
-        DEVELOPMENT_TEAM: KBT99X57V8
+        DEVELOPMENT_TEAM: 7WRYR7WZJR
         CODE_SIGN_STYLE: Automatic
         TARGETED_DEVICE_FAMILY: "2"
         PRODUCT_BUNDLE_IDENTIFIER: com.berkgozek.GitPadUITests

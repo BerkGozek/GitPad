@@ -62,10 +62,16 @@ struct CloneView: View {
                 }
 
                 Section("Folder Name") {
-                    TextField("Name", text: $name)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
-                        .onChange(of: name) { _, _ in nameEdited = true }
+                    // Only edits made in this field stop the name following the URL. (Using
+                    // onChange(of: name) also caught our own updates, so typing a URL froze
+                    // the name at its first character.)
+                    TextField("Name", text: Binding(
+                        get: { name },
+                        set: { name = $0; nameEdited = !$0.isEmpty }
+                    ))
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                    .accessibilityIdentifier("clone-name")
                 }
 
                 if isCloning {

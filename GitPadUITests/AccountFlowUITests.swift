@@ -13,6 +13,9 @@ final class AccountFlowUITests: XCTestCase {
     private func openSettings() {
         // The sidebar (with the Settings button) is always visible in landscape.
         XCUIDevice.shared.orientation = .landscapeLeft
+        // With a repository already open, the sidebar can start collapsed.
+        let showSidebar = app.buttons["Show Sidebar"].firstMatch
+        if showSidebar.waitForExistence(timeout: 3) { showSidebar.tap() }
         let settings = app.buttons["Settings"].firstMatch
         if !settings.waitForExistence(timeout: 10) {
             print("UI-DUMP-BEGIN\n\(app.debugDescription)\nUI-DUMP-END")

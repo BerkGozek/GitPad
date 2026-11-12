@@ -2,10 +2,14 @@ import GitPadCore
 import SwiftUI
 
 /// Settings → Accounts.
+///
+/// The add sheet and removal dialog are presented by the *owner* (`SettingsView`), not from
+/// this section: a sheet attached to a Form section is torn down when the Form re-renders,
+/// which closed the Add Account form (and Settings) immediately after it opened.
 struct AccountsSection: View {
     @Environment(AppModel.self) private var app
-    @State private var showingAdd = false
-    @State private var pendingRemoval: Account?
+    @Binding var showingAdd: Bool
+    @Binding var pendingRemoval: Account?
 
     var body: some View {
         Section {
@@ -33,17 +37,24 @@ struct AccountsSection: View {
         } footer: {
             Text("Tokens are stored only in this iPad's Keychain. They're never written into repository settings or shown again.")
         }
-        .sheet(isPresented: $showingAdd) {
+    }
+}
+
+extension View {
+    /// Presentation for `AccountsSection`; attach to the screen that contains the section.
+    func accountsPresentation(showingAdd: Binding<Bool>, pendingRemoval: Binding<Account?>, app: AppModel) -> some View {
+        self
+        .sheet(isPresented: showingAdd) {
             AddAccountView()
         }
         .confirmationDialog(
-            "Remove \(pendingRemoval?.displayName ?? "account")?",
-            isPresented: Binding(get: { pendingRemoval != nil }, set: { if !$0 { pendingRemoval = nil } }),
+            "Remove \(pendingRemoval.wrappedValue?.displayName ?? "account")?",
+            isPresented: Binding(get: { pendingRemoval.wrappedValue != nil }, set: { if !$0 { pendingRemoval.wrappedValue = nil } }),
             titleVisibility: .visible
         ) {
             Button("Remove Account", role: .destructive) {
-                if let pendingRemoval { app.removeAccount(pendingRemoval) }
-                pendingRemoval = nil
+                if let account = pendingRemoval.wrappedValue { app.removeAccount(account) }
+                pendingRemoval.wrappedValue = nil
             }
         } message: {
             Text("The token is deleted from this iPad. Repositories stay; private ones can't fetch or push until you add an account again. The token itself stays valid on the server; revoke it there if you no longer need it.")
@@ -74,6 +85,7 @@ struct AddAccountView: View {
                     Picker("Service", selection: $provider) {
                         ForEach(HostingProvider.allCases) { Text($0.displayName).tag($0) }
                     }
+                    .accessibilityIdentifier("service-picker")
                     .onChange(of: provider) { _, new in
                         if suggestedHost == nil || provider != HostingProvider.guess(forHost: suggestedHost ?? "") {
                             host = new.defaultHost

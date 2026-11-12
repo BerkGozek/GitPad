@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29E491FE4308D60A33330B82 /* AccountFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E03AF1A10C2AC5FB5D78DF /* AccountFlowUITests.swift */; };
 		2A625E585788E9B1AD4D80B6 /* ChangesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E2A21CF0A7FB326DCA9166 /* ChangesView.swift */; };
 		2B2F309C39CD0AB0B5764A31 /* GitPadCore in Frameworks */ = {isa = PBXBuildFile; productRef = F5CA48597026996E09FB3874 /* GitPadCore */; };
 		2B62D5B4FEFCBA270CE720DC /* GitPadApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA15B4F36DC57696041E69A /* GitPadApp.swift */; };
@@ -23,11 +24,22 @@
 		F19AF1CDF45DDA67F135B553 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BC2D17A009D3291234A298 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		29707EFBAD2A148654592AB6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CFFAB1628BB8F7945B3B2CED /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F46AF9A9B905B04E4E154BB7;
+			remoteInfo = GitPad;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		0163E252D59BB78ED468E36F /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		0E4780CDB5F825DA2B750CF2 /* GitPad.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = GitPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17BC2D17A009D3291234A298 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		23E2A21CF0A7FB326DCA9166 /* ChangesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangesView.swift; sourceTree = "<group>"; };
+		41E03AF1A10C2AC5FB5D78DF /* AccountFlowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountFlowUITests.swift; sourceTree = "<group>"; };
 		5686E5734BA345DAAC9FEE95 /* AccountsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViews.swift; sourceTree = "<group>"; };
 		61EFFF5A1567A75D67ECA1CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6EFA4ED5F2A20CD98AA66A68 /* CloneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloneView.swift; sourceTree = "<group>"; };
@@ -40,6 +52,7 @@
 		CB0B203C2CE6276616390C7D /* PushView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushView.swift; sourceTree = "<group>"; };
 		D2005166BE4420E9D0B25E44 /* HistoryBranchesViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryBranchesViews.swift; sourceTree = "<group>"; };
 		DE36DE908552B7D23DA5F49D /* RepositoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryView.swift; sourceTree = "<group>"; };
+		F5DA600F6F9E351C6C4823DC /* GitPadUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = GitPadUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				0E4780CDB5F825DA2B750CF2 /* GitPad.app */,
+				F5DA600F6F9E351C6C4823DC /* GitPadUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -78,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				0C3CC3DF4F320B8EE5C63F1C /* GitPad */,
+				E0A8036190333A0BFE42B779 /* GitPadUITests */,
 				44B0D5BD3E9A83F0BF98EE6E /* Packages */,
 				007CD2DC3A767284C021F93A /* Products */,
 			);
@@ -107,6 +122,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		E0A8036190333A0BFE42B779 /* GitPadUITests */ = {
+			isa = PBXGroup;
+			children = (
+				41E03AF1A10C2AC5FB5D78DF /* AccountFlowUITests.swift */,
+			);
+			path = GitPadUITests;
+			sourceTree = "<group>";
+		};
 		F51C0E052125FE1E93F55ED7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +142,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		7D65E3539958004CB052DE1F /* GitPadUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 417B0D7F0BA52C1FB3860F7F /* Build configuration list for PBXNativeTarget "GitPadUITests" */;
+			buildPhases = (
+				5DB4C1D372856CF4906E2B7D /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				366E5FD24B9C6D8F91DF3D58 /* PBXTargetDependency */,
+			);
+			name = GitPadUITests;
+			packageProductDependencies = (
+			);
+			productName = GitPadUITests;
+			productReference = F5DA600F6F9E351C6C4823DC /* GitPadUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		F46AF9A9B905B04E4E154BB7 /* GitPad */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9E3DEAC91743841ABCD93551 /* Build configuration list for PBXNativeTarget "GitPad" */;
@@ -148,6 +189,11 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					7D65E3539958004CB052DE1F = {
+						DevelopmentTeam = KBT99X57V8;
+						ProvisioningStyle = Automatic;
+						TestTargetID = F46AF9A9B905B04E4E154BB7;
+					};
 					F46AF9A9B905B04E4E154BB7 = {
 						DevelopmentTeam = KBT99X57V8;
 						ProvisioningStyle = Automatic;
@@ -172,6 +218,7 @@
 			projectRoot = "";
 			targets = (
 				F46AF9A9B905B04E4E154BB7 /* GitPad */,
+				7D65E3539958004CB052DE1F /* GitPadUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -188,6 +235,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5DB4C1D372856CF4906E2B7D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29E491FE4308D60A33330B82 /* AccountFlowUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DC16BA7643D6582CDDFF1257 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -209,7 +264,34 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		366E5FD24B9C6D8F91DF3D58 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F46AF9A9B905B04E4E154BB7 /* GitPad */;
+			targetProxy = 29707EFBAD2A148654592AB6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		60B6B62496D2BB52587D5F0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KBT99X57V8;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.berkgozek.GitPadUITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				TEST_TARGET_NAME = GitPad;
+			};
+			name = Release;
+		};
 		66BD1721D5993AEE0105753E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -297,6 +379,25 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.berkgozek.GitPad;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		B6C3E28D7363859FD4D3341F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KBT99X57V8;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.berkgozek.GitPadUITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				TEST_TARGET_NAME = GitPad;
 			};
 			name = Debug;
 		};
@@ -391,6 +492,15 @@
 			buildConfigurations = (
 				66BD1721D5993AEE0105753E /* Debug */,
 				DF13B1E55052A507314CE32F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		417B0D7F0BA52C1FB3860F7F /* Build configuration list for PBXNativeTarget "GitPadUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B6C3E28D7363859FD4D3341F /* Debug */,
+				60B6B62496D2BB52587D5F0C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

@@ -7,6 +7,8 @@ struct SettingsView: View {
     @Environment(AppModel.self) private var app
     @AppStorage(CommitIdentity.nameKey) private var name = ""
     @AppStorage(CommitIdentity.emailKey) private var email = ""
+    @State private var showingAddAccount = false
+    @State private var pendingAccountRemoval: Account?
 
     var body: some View {
         NavigationStack {
@@ -25,7 +27,7 @@ struct SettingsView: View {
                     Text("Used as the author of commits you make on this iPad. Use the email your Git host knows, so commits link to your account.")
                 }
 
-                AccountsSection()
+                AccountsSection(showingAdd: $showingAddAccount, pendingRemoval: $pendingAccountRemoval)
 
                 Section {
                     LabeledContent("Location", value: "On My iPad › GitPad › Repositories")
@@ -43,6 +45,7 @@ struct SettingsView: View {
                     LabeledContent("libgit2", value: libgit2Version())
                 }
             }
+            .accountsPresentation(showingAdd: $showingAddAccount, pendingRemoval: $pendingAccountRemoval, app: app)
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

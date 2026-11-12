@@ -13,7 +13,7 @@ Next: on-device check of accounts + push, then Phase 4 (GitHub sign-in via devic
 | Live HTTPS against GitHub | `GITPAD_LIVE_TESTS=1 GITPAD_TEST_REPO=… GITPAD_TEST_TOKEN=… swift test --filter LiveGitHubTests` | ✅ 1/1 against private sandbox `BerkGozek/gitpad-test-sandbox`: anonymous clone → auth error; wrong token → auth error with the token not in the message; private clone, commit, push, pull in a second clone; token not in `.git/config` |
 | App build (simulator) | `xcodebuild -scheme GitPad -destination 'generic/platform=iOS Simulator' build` | ✅ no errors, no warnings (Swift 6) |
 | App launch (simulator) | `simctl install` + `launch` + screenshot | ✅ launches to the empty state (Phase 1 build) |
-| App UI flows in simulator | — | ⏸ Not run: no UI tests yet (Phase 4) |
+| App UI tests (simulator, iPad Pro 11" M5, iOS 26.5) | `xcodebuild -scheme GitPad -destination 'id=<sim>' test` | ✅ 1/1: Settings → Add Account → type token → change service → form stays open → Cancel back to Settings |
 | Device build (command line) | `xcodebuild -destination generic/platform=iOS` | ❌ "No Accounts" in Xcode for the CLI; building from the Xcode app works (Berk installed it on the iPad) |
 
 ## Verified on Berk's iPad Air (5th gen, iPadOS 26)
@@ -21,6 +21,7 @@ Next: on-device check of accounts + push, then Phase 4 (GitHub sign-in via devic
 - Repositories did **not** appear in Files ❌ → fixed (see below), needs re-check.
 
 ## Bugs caught and fixed
+- Add Account closed itself (and Settings) right after opening, found by Berk on the iPad. The sheet was attached to a Form section inside the Settings sheet; SwiftUI tears such sections down on re-render. Now presented from the Settings screen; reproduced and verified with a UI test.
 - `INFOPLIST_KEY_UIFileSharingEnabled` was silently dropped from the generated Info.plist, so the app's folder never showed in Files → On My iPad. Both Files keys now live in `GitPad/Info.plist`; verified in the built app's Info.plist.
 - Xcode showed "Missing package product 'GitPadCore'" after the package had been opened in a separate window; fixed by restarting Xcode (stale package graph, project was fine).
 

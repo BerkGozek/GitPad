@@ -41,3 +41,27 @@ targets:
         INFOPLIST_KEY_UIApplicationSupportsMultipleScenes: YES
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+  GitPadUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: [GitPadUITests]
+    dependencies:
+      - target: GitPad
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        DEVELOPMENT_TEAM: KBT99X57V8
+        CODE_SIGN_STYLE: Automatic
+        TARGETED_DEVICE_FAMILY: "2"
+        PRODUCT_BUNDLE_IDENTIFIER: com.berkgozek.GitPadUITests
+schemes:
+  GitPad:
+    build:
+      targets:
+        GitPad: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - GitPadUITests
